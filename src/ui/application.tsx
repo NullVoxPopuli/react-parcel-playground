@@ -1,20 +1,25 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import withStateHelpers from 'react-state-helpers';
 
+export interface Props {
+  mut: (property: string) => (nextValue: any) => void,
+  values: { clickCount: number }
+}
+
 @withStateHelpers
-export default class Application extends Component {
+export default class Application extends React.Component<Props> {
   didClickButton = () => {
     const { mut, values: { clickCount } } = this.props;
 
 
-    if (clickCount % 2 === 0) {
+    if (clickCount % 2 !== 1) {
       toast.warn(`It's over Anakin!`);
     } else {
       toast.info('I have the high ground!');
     }
 
-    mut('clickCount')(clickCount + 1);
+    mut('clickCount')((clickCount || 0) + 1);
 
   }
 
@@ -30,8 +35,12 @@ export default class Application extends Component {
 
         <button onClick={this.didClickButton}>Click Me</button>
         <br />
-        Clicked {clickCount} times!
+        Clicked {clickCount || 0} times!
       </div>
     );
+  }
+
+  componentDidCatch(error, info) {
+    console.error(error, info);
   }
 }
