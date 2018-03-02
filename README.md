@@ -1,7 +1,6 @@
 # Playing with [Parcel](https://parceljs.org/getting_started.html)
 
 ```
-yarn global add parcel-bundler
 yarn install
 yarn start
 ```
