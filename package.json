@@ -1,7 +1,6 @@
 {
   "name": "react-parcel-test",
   "version": "1.0.0",
-  "main": "index.html",
   "license": "MIT",
   "scripts": {
     "start": "./node_modules/.bin/parcel src/index.html"
